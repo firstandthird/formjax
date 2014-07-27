@@ -1,0 +1,25 @@
+{
+  "name": "formjax",
+  "description": "Submit a form via ajax",
+  "version": "0.0.1",
+  "homepage": "",
+  "license": "MIT",
+  "copyright": "First+Third",
+  "main": "dist/formjax.bower.js",
+  "dependencies": {
+    "jquery": "*",
+    "fidel": "~2.2.5"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "blanket": "*"
+  },
+  "ignore": [
+    "test",
+    "example",
+    "lib",
+    "Gruntfile.js",
+    "package.json",
+    "grunt"
+  ]
+}
