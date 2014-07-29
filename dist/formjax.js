@@ -1,6 +1,6 @@
 /*!
  * formjax - Submit a form via ajax
- * v0.0.1
+ * v0.0.2
  * 
  * copyright First+Third 2014
  * MIT License
@@ -244,7 +244,7 @@
         .removeClass(this.progressClass)
         .addClass(this.successClass)
         .val(this.successText);
-      this.emit('ajaxify:success', response);
+      this.emit('formjax:success', response);
       this.success.call(this.el, response);
     },
 
@@ -254,7 +254,7 @@
         .addClass(this.errorClass)
         .val(this.errorText);
       $.notice(response.responseJSON.message, { level: 'error' });
-      this.emit('ajaxify:error', response);
+      this.emit('formjax:error', response);
       this.error.call(this.el, response);
     }
   });
