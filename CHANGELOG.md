@@ -1,4 +1,10 @@
 
+0.1.0 / 2014-08-08
+==================
+
+  * add support for button tags
+  * added support for successRedirect and successRefresh
+
 0.0.2 / 2014-07-29
 ==================
 

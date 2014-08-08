@@ -1,6 +1,6 @@
 /*!
  * formjax - Submit a form via ajax
- * v0.0.2
+ * v0.1.0
  * 
  * copyright First+Third 2014
  * MIT License
@@ -16,6 +16,8 @@
       progressText: 'Sending...',
       successText: 'Done!',
       errorText: 'Uh oh',
+      successRedirect: false,
+      successRefresh: false,
       validate: function() {
         //do some validation, if return false, don't submit, if true, submit
         return true;
@@ -52,10 +54,22 @@
     _success: function(response) {
       this.button
         .removeClass(this.progressClass)
-        .addClass(this.successClass)
-        .val(this.successText);
+        .addClass(this.successClass);
+
+      if (this.button[0].tagName == 'INPUT') {
+        this.button.val(this.successText);
+      } else {
+        this.button.text(this.successText);
+      }
+
       this.emit('formjax:success', response);
       this.success.call(this.el, response);
+      if (this.successRefresh) {
+        window.location.reload();
+      }
+      if (this.successRedirect) {
+        window.location = this.successRedirect;
+      }
     },
 
     _error: function(response) {
