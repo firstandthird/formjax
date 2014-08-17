@@ -1,6 +1,6 @@
 /*!
  * formjax - Submit a form via ajax
- * v0.2.0
+ * v0.3.0
  * 
  * copyright First+Third 2014
  * MIT License
@@ -36,6 +36,7 @@
 
     init: function() {
       this.button = this.el.find(this.submitButton);
+      this.emit('formjax:init', this);
     },
 
     submit: function(e) {
@@ -45,10 +46,19 @@
           .addClass(this.progressClass)
           .val(this.progressText);
 
+        this.disable();
         $.post(this.el.attr('action'), this.el.serialize())
           .done(this.proxy(this._success))
           .fail(this.proxy(this._error));
       }
+    },
+
+    disable: function() {
+      this.button.attr('disabled', 'disabled');
+    },
+
+    enable: function() {
+      this.button.removeAttr('disabled');
     },
 
     _success: function(response) {
@@ -61,6 +71,7 @@
       } else {
         this.button.text(this.successText);
       }
+      this.enable();
 
       this.emit('formjax:success', response);
       this.success.call(this.el, response);
@@ -77,6 +88,7 @@
         .removeClass(this.progressClass)
         .addClass(this.errorClass)
         .val(this.errorText);
+      this.enable();
       this.emit('formjax:error', response);
       this.error.call(this.el, response);
     }

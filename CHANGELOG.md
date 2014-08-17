@@ -1,4 +1,11 @@
 
+0.3.0 / 2014-08-17
+==================
+
+  * disable button when submitting
+  * added event after formjax has initialized
+  * added real example
+
 0.2.0 / 2014-08-08
 ==================
 
