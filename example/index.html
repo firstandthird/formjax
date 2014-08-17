@@ -9,10 +9,27 @@
     <form action="/" method="POST">
       <label>Name</label>
       <input type="text" name="name"/>
-      <button type="submit">Submit</button>
+      <button disabled type="submit">Submit</button>
     </form>
 
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../dist/formjax.js"></script>
+    <script>
+      //mock $.post
+      $.post = function(url, data) {
+        var dfd = new jQuery.Deferred();
+
+        setTimeout(function() {
+          dfd.resolve('success');
+        }, 500);
+
+        return dfd.promise();
+      };
+      $('form')
+        .on('formjax:init', function(e, cls) {
+          cls.enable();
+        })
+        .formjax();
+    </script>
   </body>
 </html>
