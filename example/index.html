@@ -9,7 +9,7 @@
     <form action="/" method="POST">
       <label>Name</label>
       <input type="text" name="name"/>
-      <button disabled type="submit">Submit</button>
+      <button type="submit">Submit</button>
     </form>
 
     <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -25,11 +25,7 @@
 
         return dfd.promise();
       };
-      $('form')
-        .on('formjax:init', function(e, cls) {
-          cls.enable();
-        })
-        .formjax();
+      $('form').formjax();
     </script>
   </body>
 </html>
