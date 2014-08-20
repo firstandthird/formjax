@@ -20,12 +20,20 @@
         var dfd = new jQuery.Deferred();
 
         setTimeout(function() {
+          console.log(data);
           dfd.resolve('success');
         }, 500);
 
         return dfd.promise();
       };
-      $('form').formjax();
+      $('form').formjax({
+        before: function() {
+          return {
+            testVal: 'test',
+            anotherval: 'testing'
+          }
+        }
+      });
     </script>
   </body>
 </html>
