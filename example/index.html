@@ -6,7 +6,15 @@
   </head>
   <body>
 
-    <form action="/" method="POST">
+    <h2>Post</h2>
+    <form action="/" method="post">
+      <label>Name</label>
+      <input type="text" name="name"/>
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Get</h2>
+    <form action="/" method="get">
       <label>Name</label>
       <input type="text" name="name"/>
       <button type="submit">Submit</button>
@@ -15,16 +23,28 @@
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../dist/formjax.js"></script>
     <script>
-      //mock $.post
+      //mock $.post, $.get
       $.post = function(url, data) {
         var dfd = new jQuery.Deferred();
 
         setTimeout(function() {
           dfd.resolve('success');
+          console.log('post', url, data);
         }, 500);
 
         return dfd.promise();
       };
+      $.get = function(url, data) {
+        var dfd = new jQuery.Deferred();
+
+        setTimeout(function() {
+          dfd.resolve('success');
+          console.log('get', url, data);
+        }, 500);
+
+        return dfd.promise();
+      };
+
       $('form').formjax();
     </script>
   </body>
