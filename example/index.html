@@ -20,26 +20,30 @@
       <button type="submit">Submit</button>
     </form>
 
+    <h2>Put</h2>
+    <form action="/" method="put">
+      <label>Name</label>
+      <input type="text" name="name"/>
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Delete</h2>
+    <form action="/" method="delete">
+      <label>Name</label>
+      <input type="text" name="name"/>
+      <button type="submit">Submit</button>
+    </form>
+
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../dist/formjax.js"></script>
     <script>
-      //mock $.post, $.get
-      $.post = function(url, data) {
+      //mock $.ajax
+      $.ajax = function(options) {
         var dfd = new jQuery.Deferred();
 
         setTimeout(function() {
           dfd.resolve('success');
-          console.log('post', url, data);
-        }, 500);
-
-        return dfd.promise();
-      };
-      $.get = function(url, data) {
-        var dfd = new jQuery.Deferred();
-
-        setTimeout(function() {
-          dfd.resolve('success');
-          console.log('get', url, data);
+          console.log(options);
         }, 500);
 
         return dfd.promise();
