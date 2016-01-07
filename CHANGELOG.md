@@ -1,4 +1,11 @@
 
+0.4.0 / 2016-01-06
+==================
+
+  * Merge pull request #4 from firstandthird/feature/use-method-value
+  * Add support for all methods
+  * Use method from form
+
 0.3.1 / 2014-08-18
 ==================
 
