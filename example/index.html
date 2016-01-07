@@ -6,7 +6,29 @@
   </head>
   <body>
 
-    <form action="/" method="POST">
+    <h2>Post</h2>
+    <form action="/" method="post">
+      <label>Name</label>
+      <input type="text" name="name"/>
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Get</h2>
+    <form action="/" method="get">
+      <label>Name</label>
+      <input type="text" name="name"/>
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Put</h2>
+    <form action="/" method="put">
+      <label>Name</label>
+      <input type="text" name="name"/>
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Delete</h2>
+    <form action="/" method="delete">
       <label>Name</label>
       <input type="text" name="name"/>
       <button type="submit">Submit</button>
@@ -15,16 +37,18 @@
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../dist/formjax.js"></script>
     <script>
-      //mock $.post
-      $.post = function(url, data) {
+      //mock $.ajax
+      $.ajax = function(options) {
         var dfd = new jQuery.Deferred();
 
         setTimeout(function() {
           dfd.resolve('success');
+          console.log(options);
         }, 500);
 
         return dfd.promise();
       };
+
       $('form').formjax();
     </script>
   </body>
