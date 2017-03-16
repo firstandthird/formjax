@@ -34,22 +34,6 @@
       <button type="submit">Submit</button>
     </form>
 
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../dist/formjax.js"></script>
-    <script>
-      //mock $.ajax
-      $.ajax = function(options) {
-        var dfd = new jQuery.Deferred();
-
-        setTimeout(function() {
-          dfd.resolve('success');
-          console.log(options);
-        }, 500);
-
-        return dfd.promise();
-      };
-
-      $('form').formjax();
-    </script>
   </body>
 </html>

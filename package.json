@@ -1,29 +1,58 @@
 {
   "name": "formjax",
-  "version": "0.0.0",
-  "private": true,
-  "devDependencies": {
-    "grunt": "0.4.5",
-    "grunt-bytesize": "~0.1.0",
-    "grunt-concat-bower": "~0.3.1",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-concat": "~0.5.0",
-    "grunt-contrib-connect": "~0.8.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-uglify": "~0.5.1",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-mocha": "~0.4.1",
-    "grunt-notify": "~0.3.0",
-    "grunt-shell": "~0.7.0",
-    "grunt-jscs": "~0.6.1",
-    "grunt-contrib-less": "~0.11.0",
-    "grunt-autoprefixer": "^0.8.2",
-    "ft-build": "0.3.0-beta.4"
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/formjax.js",
+  "module": "index.js",
+  "keywords": [],
+  "scripts": {
+    "start": "scriptkit",
+    "build": "scriptkit build",
+    "dev": "scriptkit dev",
+    "test": "cat test/formjax.test.dist.js | tape-run --static . --browser phantomjs --render tap-spec",
+    "prepublish": "scriptkit"
   },
-  "meta": {
-    "ftInit": {
-      "version": "0.4.2",
-      "type": "browser"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/firstandthird/formjax.git"
+  },
+  "author": "First+Third",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/firstandthird/formjax/issues"
+  },
+  "homepage": "https://github.com/firstandthird/formjax#readme",
+  "devDependencies": {
+    "eslint-config-firstandthird": "3.2.0",
+    "eslint-plugin-import": "2.2.0",
+    "phantomjs-prebuilt": "2.1.14",
+    "scriptkit": "0.2.0",
+    "tap-spec": "4.1.1",
+    "tape-rollup": "4.6.4",
+    "tape-run": "2.2.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "extends": "firstandthird"
+  },
+  "scriptkit": {
+    "files": {
+      "dist/formjax.js": "index.js",
+      "test/formjax.test.dist.js": "test/formjax.test.js"
+    },
+    "scripts": {
+      "babel": {
+        "exclude": [
+          "node_modules/tape-rollup/*"
+        ]
+      }
     }
+  },
+  "dependencies": {
+    "bequest": "^1.3.2",
+    "domodule": "^5.1.1",
+    "formobj": "^4.0.0"
   }
 }

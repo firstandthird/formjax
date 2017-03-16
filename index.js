@@ -1,0 +1,78 @@
+import Domodule from 'domodule';
+import Ajax from 'bequest';
+import formobj from 'formobj';
+
+function tinytemplate(string) {
+  return string;
+}
+
+class Formjax extends Domodule {
+  preInit() {
+    if (this.el.tagName !== 'FORM') {
+      throw new Error('Formjax need to be attached to a form');
+    }
+
+    this.method = this.el.getAttribute('method').toUpperCase();
+    this.url = this.el.getAttribute('action');
+    this.form = formobj(this.el);
+    this.sending = false;
+  }
+
+  get defaults() {
+    return {
+      confirm: false,
+      successReload: false,
+      confirmText: 'Are you sure you want to submit?'
+    }
+  }
+
+  confirm(callback) {
+    if (window.confirm(this.options.confirmText)) {
+      callback();
+    }
+  }
+
+  submit(el, event) {
+    event.preventDefault();
+
+    if (this.options.confirm) {
+      this.confirm(this.sendForm.bind(this));
+    } else {
+      this.sendForm();
+    }
+  }
+
+  sendForm() {
+    if (this.sending) {
+      return;
+    }
+
+    this.sending = true;
+    const args = [this.url, this.method];
+
+    if (this.method === 'GET') {
+      let url = this.url;
+      const uri = this.form.getQueryString();
+
+      if (url.indexOf('?') > -1) {
+        url = `${url}&${uri}`;
+      } else {
+        url = `${url}?${uri}`;
+      }
+
+      args[0] = url;
+    } else {
+      args.push(this.form.getJSON());
+    }
+
+    Ajax.request(...args, (err, resp) => {
+      if (!err && resp.statusCode === 200) {
+        if (this.options.successReload) {
+          window.location.reload();
+        } else if (this.options.success) {
+          window.location.href = tinytemplate(resp.data);
+        }
+      }
+    });
+  }
+}
