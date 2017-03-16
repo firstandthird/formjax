@@ -23,12 +23,12 @@ class Formjax extends Domodule {
       confirm: false,
       successReload: false,
       confirmText: 'Are you sure you want to submit?'
-    }
+    };
   }
 
-  confirm(callback) {
-    if (window.confirm(this.options.confirmText)) {
-      callback();
+  confirm(sendForm) {
+    if (window.confirm(this.options.confirmText)) { // eslint-disable-line no-alert
+      sendForm();
     }
   }
 
@@ -68,11 +68,23 @@ class Formjax extends Domodule {
     Ajax.request(...args, (err, resp) => {
       if (!err && resp.statusCode === 200) {
         if (this.options.successReload) {
-          window.location.reload();
+          Formjax.reload();
         } else if (this.options.success) {
-          window.location.href = tinytemplate(resp.data);
+          Formjax.goTo(tinytemplate(this.options.success, resp.data));
         }
       }
     });
   }
+
+  static reload() {
+    window.location.reload();
+  }
+
+  static goTo(url) {
+    window.location.href = url;
+  }
 }
+
+Domodule.register('Formjax', Formjax);
+
+export default Formjax;
