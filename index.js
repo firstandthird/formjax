@@ -1,10 +1,7 @@
 import Domodule from 'domodule';
 import Ajax from 'bequest';
 import formobj from 'formobj';
-
-function tinytemplate(string) {
-  return string;
-}
+import tinytemplate from 'tinytemplate';
 
 class Formjax extends Domodule {
   preInit() {
