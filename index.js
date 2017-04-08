@@ -69,6 +69,9 @@ class Formjax extends Domodule {
         } else if (this.options.success) {
           Formjax.goTo(tinytemplate(this.options.success, resp.data));
         }
+      } else {
+        alert(resp.data.message);
+        this.sending = false;
       }
     });
   }
