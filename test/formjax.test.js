@@ -138,6 +138,26 @@ test('Form confirm', assert => {
   teardown();
 });
 
+test('Show error', assert => {
+  const instance = setup('post')[0];
+
+  instance.submit(instance.el, event);
+  const f = request[0][3];
+  const oldAlert = window.alert;
+  window.alert = message => {
+    assert.equal(message, 'Test', 'Should alert with given message');
+  };
+  f(false, {
+    statusCode: 500,
+    data: {
+      message: 'Test'
+    }
+  });
+  window.alert = oldAlert;
+  assert.end();
+  teardown();
+});
+
 test('Page reload', assert => {
   const instance = setup('post', 'data-module-success-reload="true"')[0];
   instance.submit(instance.el, event);
