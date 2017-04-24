@@ -40,8 +40,6 @@ const setup = (method = 'post', extra = '') => {
       action="/blah/blah" 
       method="${method}"
       data-module="Formjax"
-      data-action="submit"
-      data-action-type="submit"
       ${extra}>
       
       <input type="hidden" name="siteId" value="site1"/>
