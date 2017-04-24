@@ -75,7 +75,7 @@ class Formjax extends Domodule {
           Formjax.goTo(tinytemplate(this.options.success, resp.data));
         }
       } else {
-        alert(resp.data.message);
+        alert(resp.data.message); // eslint-disable-line no-alert
         this.sending = false;
       }
     });
