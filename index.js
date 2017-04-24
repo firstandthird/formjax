@@ -2,6 +2,7 @@ import Domodule from 'domodule';
 import Ajax from 'bequest';
 import formobj from 'formobj';
 import tinytemplate from 'tinytemplate';
+import { on } from 'domassist';
 
 class Formjax extends Domodule {
   preInit() {
@@ -13,6 +14,10 @@ class Formjax extends Domodule {
     this.url = this.el.getAttribute('action');
     this.form = formobj(this.el);
     this.sending = false;
+
+    on(this.form, 'submit', event => {
+      this.submit(this.el, event);
+    });
   }
 
   get defaults() {
