@@ -72,10 +72,19 @@ class Formjax extends Domodule {
         if (this.options.successReload) {
           Formjax.reload();
         } else if (this.options.success) {
-          Formjax.goTo(tinytemplate(this.options.success, resp.data));
+          try {
+            const url = tinytemplate(this.options.success, resp.data);
+            Formjax.goTo(url);
+          } catch (e) {
+            alert(e.message); // eslint-disable-line no-alert
+            this.sending = false;
+          }
         }
       } else {
-        alert(resp.data.message); // eslint-disable-line no-alert
+        if (resp.data && resp.data.message) {
+          alert(resp.data.message); // eslint-disable-line no-alert
+        }
+
         this.sending = false;
       }
     });
