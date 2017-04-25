@@ -2,6 +2,7 @@ import Domodule from 'domodule';
 import Ajax from 'bequest';
 import formobj from 'formobj';
 import tinytemplate from 'tinytemplate';
+import { on } from 'domassist';
 
 class Formjax extends Domodule {
   preInit() {
@@ -13,6 +14,10 @@ class Formjax extends Domodule {
     this.url = this.el.getAttribute('action');
     this.form = formobj(this.el);
     this.sending = false;
+
+    on(this.form, 'submit', event => {
+      this.submit(this.el, event);
+    });
   }
 
   get defaults() {
@@ -67,10 +72,19 @@ class Formjax extends Domodule {
         if (this.options.successReload) {
           Formjax.reload();
         } else if (this.options.success) {
-          Formjax.goTo(tinytemplate(this.options.success, resp.data));
+          try {
+            const url = tinytemplate(this.options.success, resp.data);
+            Formjax.goTo(url);
+          } catch (e) {
+            alert(e.message); // eslint-disable-line no-alert
+            this.sending = false;
+          }
         }
       } else {
-        alert(resp.data.message);
+        if (resp.data && resp.data.message) {
+          alert(resp.data.message); // eslint-disable-line no-alert
+        }
+
         this.sending = false;
       }
     });
