@@ -1,6 +1,6 @@
 {
   "name": "formjax",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "main": "dist/formjax.js",
   "module": "index.js",
