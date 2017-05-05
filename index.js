@@ -2,7 +2,7 @@ import Domodule from 'domodule';
 import Ajax from 'bequest';
 import formobj from 'formobj';
 import tinytemplate from 'tinytemplate';
-import { on } from 'domassist';
+import { on, fire } from 'domassist';
 
 class Formjax extends Domodule {
   preInit() {
@@ -68,7 +68,11 @@ class Formjax extends Domodule {
     }
 
     Ajax.request(...args, (err, resp) => {
+      let eventName = '';
+
       if (!err && resp.statusCode === 200) {
+        eventName = 'formjax:success';
+
         if (this.options.successReload) {
           Formjax.reload();
         } else if (this.options.success) {
@@ -81,12 +85,17 @@ class Formjax extends Domodule {
           }
         }
       } else {
+        eventName = 'formjax:error';
         if (resp.data && resp.data.message) {
           alert(resp.data.message); // eslint-disable-line no-alert
         }
 
         this.sending = false;
       }
+
+      fire(this.el, eventName, {
+        detail: resp.data
+      });
     });
   }
 

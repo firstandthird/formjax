@@ -158,6 +158,50 @@ test('Show error', assert => {
   teardown();
 });
 
+test('Success event', assert => {
+  assert.plan(2);
+  const instance = setup('post')[0];
+
+  instance.submit(instance.el, event);
+  const f = request[0][3];
+  instance.el.addEventListener('formjax:success', e => {
+    assert.pass('Success event has been fired');
+    assert.equal(e.detail.foo, 'bar', 'Should pass response data back to the event');
+  });
+
+  f(false, {
+    statusCode: 200,
+    data: {
+      foo: 'bar'
+    }
+  });
+
+  assert.end();
+  teardown();
+});
+
+test('Error event', assert => {
+  assert.plan(2);
+  const instance = setup('post')[0];
+
+  instance.submit(instance.el, event);
+  const f = request[0][3];
+  instance.el.addEventListener('formjax:error', e => {
+    assert.pass('Error event has been fired');
+    assert.equal(e.detail.foo, 'bar', 'Should pass response data back to the event');
+  });
+
+  f(false, {
+    statusCode: 500,
+    data: {
+      foo: 'bar'
+    }
+  });
+
+  assert.end();
+  teardown();
+});
+
 test('Page reload', assert => {
   const instance = setup('post', 'data-module-success-reload="true"')[0];
   instance.submit(instance.el, event);
