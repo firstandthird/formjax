@@ -69,6 +69,7 @@ class Formjax extends Domodule {
 
     Ajax.request(...args, (err, resp) => {
       let eventName = '';
+      this.sending = false;
 
       if (!err && resp.statusCode === 200) {
         eventName = 'formjax:success';
@@ -81,7 +82,6 @@ class Formjax extends Domodule {
             Formjax.goTo(url);
           } catch (e) {
             alert(e.message); // eslint-disable-line no-alert
-            this.sending = false;
           }
         }
       } else {
@@ -89,8 +89,6 @@ class Formjax extends Domodule {
         if (resp.data && resp.data.message) {
           alert(resp.data.message); // eslint-disable-line no-alert
         }
-
-        this.sending = false;
       }
 
       fire(this.el, eventName, {
