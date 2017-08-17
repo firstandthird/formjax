@@ -15,7 +15,7 @@ class Formjax extends Domodule {
     this.form = formobj(this.el);
     this.sending = false;
 
-    on(this.form, 'submit', event => {
+    on(this.el, 'submit', event => {
       this.submit(this.el, event);
     });
   }
