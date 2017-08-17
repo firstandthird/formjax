@@ -1,6 +1,7 @@
 import Formjax from '../index';
 import Ajax from 'bequest';
 import test from 'tape-rollup';
+import { fire } from 'domassist';
 
 const request = [];
 let reloaded = false;
@@ -80,6 +81,20 @@ test('Defaults', assert => {
   assert.equal(instance.options.successReload, false, 'Reload on success is false by default');
   assert.equal(instance.options.confirmText, 'Are you sure you want to submit?', 'Sensible confirm text');
   assert.end();
+  teardown();
+});
+
+test('Form has bound submit', assert => {
+  const instance = setup()[0];
+
+  instance.submit = () => {
+    assert.pass('Fires on submit');
+    assert.end();
+  };
+
+  fire(instance.el, 'submit');
+
+  assert.plan(1);
   teardown();
 });
 
