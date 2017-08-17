@@ -24,12 +24,12 @@
   "homepage": "https://github.com/firstandthird/formjax#readme",
   "devDependencies": {
     "eslint-config-firstandthird": "3.2.0",
-    "eslint-plugin-import": "2.2.0",
-    "phantomjs-prebuilt": "2.1.14",
+    "eslint-plugin-import": "2.7.0",
+    "phantomjs-prebuilt": "2.1.15",
     "scriptkit": "0.2.0",
     "tap-spec": "4.1.1",
     "tape-rollup": "4.6.4",
-    "tape-run": "2.2.0"
+    "tape-run": "3.0.0"
   },
   "eslintConfig": {
     "env": {
@@ -51,10 +51,10 @@
     }
   },
   "dependencies": {
-    "bequest": "^1.3.2",
+    "bequest": "^1.4.2",
     "domassist": "^1.9.0",
-    "domodule": "^5.1.1",
+    "domodule": "^5.1.3",
     "formobj": "^4.0.0",
-    "tinytemplate": "^1.0.0"
+    "tinytemplate": "^2.0.0"
   }
 }
