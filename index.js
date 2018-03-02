@@ -4,6 +4,11 @@ import formobj from 'formobj';
 import tinytemplate from 'tinytemplate';
 import { on, fire } from 'domassist';
 
+const Events = {
+  Error: 'formjax:error',
+  Success: 'formjax:success'
+};
+
 class Formjax extends Domodule {
   preInit() {
     if (this.el.tagName !== 'FORM') {
@@ -67,12 +72,16 @@ class Formjax extends Domodule {
       args.push(this.form.getJSON());
     }
 
+    this.request(args);
+  }
+
+  request(args) {
     Ajax.request(...args, (err, resp) => {
       let eventName = '';
       this.sending = false;
 
       if (!err && resp.statusCode === 200) {
-        eventName = 'formjax:success';
+        eventName = Events.Success;
 
         if (this.options.successReload) {
           Formjax.reload();
@@ -85,13 +94,15 @@ class Formjax extends Domodule {
           }
         }
       } else {
-        eventName = 'formjax:error';
+        eventName = Events.Error;
+
         if (resp.data && resp.data.message) {
           alert(resp.data.message); // eslint-disable-line no-alert
         }
       }
 
       fire(this.el, eventName, {
+        bubbles: true,
         detail: resp.data
       });
     });
