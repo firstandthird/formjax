@@ -62,8 +62,8 @@ const teardown = () => {
 init();
 
 test('Example module registerd', assert => {
-  assert.equal(typeof Formjax.modules, 'object');
-  assert.equal(Object.keys(Formjax.modules).length, 1, 'One module registered');
+  assert.equal(typeof window.domodules, 'object');
+  assert.equal(Object.keys(window.domodules).length, 1, 'One module registered');
   assert.end();
 });
 
@@ -104,6 +104,7 @@ test('Form behaviour', assert => {
 
   assert.equal(defaultPrevented, true, 'Prevents default');
   assert.equal(request.length, 1, 'A request is submitted');
+  assert.ok(instance.el.classList.contains('formjax-progress'), 'Has a progress class');
   assert.end();
   teardown();
 });
@@ -174,7 +175,7 @@ test('Show error', assert => {
 });
 
 test('Success event', assert => {
-  assert.plan(2);
+  assert.plan(4);
   const instance = setup('post')[0];
 
   instance.submit(instance.el, event);
@@ -190,13 +191,15 @@ test('Success event', assert => {
       foo: 'bar'
     }
   });
+  assert.notOk(instance.el.classList.contains('formjax-progress'), 'Does not have a progress class');
+  assert.ok(instance.el.classList.contains('formjax-success'), 'Does have a success class');
 
   assert.end();
   teardown();
 });
 
 test('Error event', assert => {
-  assert.plan(2);
+  assert.plan(4);
   const instance = setup('post')[0];
 
   instance.submit(instance.el, event);
@@ -212,6 +215,8 @@ test('Error event', assert => {
       foo: 'bar'
     }
   });
+  assert.notOk(instance.el.classList.contains('formjax-progress'), 'Does not have a progress class');
+  assert.ok(instance.el.classList.contains('formjax-error'), 'Does have a error class');
 
   assert.end();
   teardown();

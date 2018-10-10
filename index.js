@@ -2,11 +2,17 @@ import Domodule from 'domodule';
 import Ajax from 'bequest';
 import formobj from 'formobj';
 import tinytemplate from 'tinytemplate';
-import { on, fire } from 'domassist';
+import { on, fire, addClass, removeClass } from 'domassist';
 
 const Events = {
   Error: 'formjax:error',
   Success: 'formjax:success'
+};
+
+const Css = {
+  Progress: 'formjax-progress',
+  Error: 'formjax-error',
+  Success: 'formjax-success'
 };
 
 class Formjax extends Domodule {
@@ -54,6 +60,9 @@ class Formjax extends Domodule {
       return;
     }
 
+    removeClass(this.el, [Css.Error, Css.Success]);
+    addClass(this.el, Css.Progress);
+
     this.sending = true;
     const args = [this.url, this.method];
 
@@ -78,10 +87,12 @@ class Formjax extends Domodule {
   request(args) {
     Ajax.request(...args, (err, resp) => {
       let eventName = '';
+      let className = '';
       this.sending = false;
 
       if (!err && resp.statusCode === 200) {
         eventName = Events.Success;
+        className = Css.Success;
 
         if (this.options.successReload) {
           Formjax.reload();
@@ -95,11 +106,15 @@ class Formjax extends Domodule {
         }
       } else {
         eventName = Events.Error;
+        className = Css.Error;
 
         if (resp.data && resp.data.message) {
           alert(resp.data.message); // eslint-disable-line no-alert
         }
       }
+
+      removeClass(this.el, Css.Progress);
+      addClass(this.el, className);
 
       fire(this.el, eventName, {
         bubbles: true,
