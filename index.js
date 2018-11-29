@@ -90,7 +90,7 @@ class Formjax extends Domodule {
       let className = '';
       this.sending = false;
 
-      if (!err && resp.statusCode === 200) {
+      if (!err && resp.statusCode < 400) {
         eventName = Events.Success;
         className = Css.Success;
 
