@@ -90,10 +90,6 @@ class Formjax extends Domodule {
       let className = '';
       this.sending = false;
 
-      if(resp.statusCode >= 400) {
-        return err = 'Bad response';
-      }
-
       if (!err && resp.statusCode < 400) {
         eventName = Events.Success;
         className = Css.Success;
