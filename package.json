@@ -1,9 +1,9 @@
 {
   "name": "formjax",
   "version": "1.4.1",
-  "description": "",
-  "main": "dist/formjax.js",
-  "module": "index.js",
+  "description": "Submit a form via ajax",
+  "main": "index.js",
+  "module": "dist/formjax.esm.js",
   "keywords": [],
   "scripts": {
     "start": "scriptkit",
@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/firstandthird/formjax#readme",
   "devDependencies": {
-    "eslint-config-firstandthird": "4.3.0",
-    "eslint-plugin-import": "2.9.0",
-    "phantomjs-prebuilt": "2.1.16",
-    "scriptkit": "0.3.0",
-    "tap-spec": "4.1.1",
-    "tape-rollup": "4.6.4",
-    "tape-run": "3.0.4"
+    "eslint-config-firstandthird": "^4.3.0",
+    "eslint-plugin-import": "^2.16.0",
+    "phantomjs-prebuilt": "^2.1.16",
+    "scriptkit": "^2.0.1",
+    "tap-spec": "^5.0.0",
+    "tape-rollup": "^4.6.4",
+    "tape-run": "^5.0.0"
   },
   "eslintConfig": {
     "env": {
@@ -52,9 +52,9 @@
   },
   "dependencies": {
     "bequest": "^1.4.2",
-    "domassist": "^1.9.0",
-    "domodule": "^5.1.3",
-    "formobj": "^4.0.0",
+    "domassist": "^2.0.1",
+    "domodule": "^5.2.0",
+    "formobj": "^4.0.1",
     "tinytemplate": "^2.0.0"
   }
 }
