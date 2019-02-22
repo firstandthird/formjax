@@ -1,6 +1,6 @@
 {
   "name": "formjax",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "description": "Submit a form via ajax",
   "main": "index.js",
   "module": "dist/formjax.esm.js",
