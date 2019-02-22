@@ -1,8 +1,10 @@
-.DS_Store
 node_modules
-reports
-dist/**
-.gitignore
-.node-version
+npm-debug.log
 .idea
+test/*
+*.map
+.DS_Store
+.git
+.editorconfig
+.node-version
 .travis.yml
