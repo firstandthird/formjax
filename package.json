@@ -42,6 +42,9 @@
       "dist/formjax.js": "index.js",
       "test/formjax.test.dist.js": "test/formjax.test.js"
     },
+    "serve": {
+      "enabled": true
+    },
     "scripts": {
       "babel": {
         "exclude": [
