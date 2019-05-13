@@ -119,7 +119,7 @@ class Formjax extends Domodule {
 
       fire(this.el, eventName, {
         bubbles: true,
-        detail: resp.data
+        detail: resp ? resp.data : null
       });
     });
   }
