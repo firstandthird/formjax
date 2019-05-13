@@ -9,6 +9,7 @@
     "start": "scriptkit",
     "build": "scriptkit build",
     "dev": "scriptkit dev",
+    "pretest": "npm run build",
     "test": "cat test/formjax.test.dist.js | tape-run --static . --browser phantomjs --render tap-spec",
     "prepublishOnly": "scriptkit"
   },

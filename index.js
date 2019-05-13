@@ -108,7 +108,8 @@ class Formjax extends Domodule {
         eventName = Events.Error;
         className = Css.Error;
 
-        if (resp.data && resp.data.message) {
+        // CORS can lead to no response
+        if (resp && resp.data && resp.data.message) {
           alert(resp.data.message); // eslint-disable-line no-alert
         }
       }
