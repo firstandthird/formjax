@@ -3,5 +3,5 @@ npm-debug.log
 .idea
 test/*.dist.*
 dist
-*.map
+test/dist
 .DS_Store
