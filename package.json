@@ -62,6 +62,6 @@
     "domassist": "^2.2.0",
     "domodule": "^6.1.0",
     "formobj": "^5.1.0",
-    "tinytemplate": "^2.0.0"
+    "tinytemplate": "^3.0.0"
   }
 }
